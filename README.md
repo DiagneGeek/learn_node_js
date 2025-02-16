@@ -8,7 +8,7 @@ If you want to use this repo, you can clone it with
 ```bash
  git clone https://github.com/DiagneGeek/learn_node_js.git
 ```
-            or 
+  or 
 
 ```shall
   gh repo clone DiagneGeek/learn_node_js
