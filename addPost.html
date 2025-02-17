@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add a posts</title>
+</head>
+<body>
+    <nav>
+        <a href="/" class="homeLink">Home</a>
+        <a href="/addPost">Ajouter</a>
+    </nav>
+
+     <main>
+        <form onsubmit="addPost(event)">
+            <label>
+                titre:
+                <input type="text" value="diagne js">
+            </label>
+               <br>
+            <label>
+                content: 
+                <textarea>The best js framework</textarea>
+            </label>
+
+            <button type="submit">poster</button>
+        </form>
+     </main>
+
+     <script>
+        let $ = (s) => document.querySelector(s)
+
+        let homeLink = $(".homeLink")
+
+        const addPost = async (e) => {
+            e.preventDefault()
+            let title = $('form input').value
+            let content = $("form textarea").value
+
+          try{ 
+            const res = await fetch("/api/posts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({title, content})
+            })
+            const newPost = await res.json()
+            homeLink.click()
+          }
+         catch(e) {
+             console.log(e)
+          }
+        }
+     </script>
+</body>
+</html>

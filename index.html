@@ -3,44 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
+    <title>3ème Family</title>
 </head>
 <body>
-    <h1>Todo List !</h1>
-    <form id="todoForm" onsubmit="addTodo(event)">
-        <input type="text" id="todoInput" placeholder="Enter todo">
-        <button type="submit">Add</button>
-    </form>
-    <ul id="todoList"></ul>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/addPost">Ajouter</a>
+    </nav>
+
+    <main>
+       <h1>POSTES</h1>
+
+       <section class="posts"></section>
+    </main>
+
     <script>
-       const displayTodos = () => fetch("/api/todos").then(res => res.json()).then(data => {
-           let list = document.getElementById("todoList")
-           list.innerHTML = ""
-            data.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item.title;
-                list.appendChild(li);
-            });
-        });
-        displayTodos()
+        let postsSec = document.querySelector(".posts")
+        const displayPosts = () => {
+            fetch("/api/posts").then(res => res.json()).then(posts => {
+                console.log(posts)
+                postsSec.innerHTML = ""
+                posts.forEach(post => {
+                    let newPost = `
+                      <div>
+                         <h1>${post.title}</h1>
+                         <p>${post.body}</p>
+                         <button onclick="remove(${post.id})">supprimer</button>
+                      </div>
+                    `
+                    postsSec.innerHTML += newPost
+                });
+            })
+        }
 
-        setInterval(() => displayTodos(), 1000)
+        displayPosts()
 
-        function addTodo(e) {
-            e.preventDefault();
-            const title = document.getElementById("todoInput").value;
-            fetch("/api/todos", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ title })
-            }).then(res => res.json()).then(data => {
-                const li = document.createElement("li");
-                li.textContent = data.title;
-                document.getElementById("todoList").appendChild(li);
-                document.getElementById("todoInput").value = "";
-            });
+        setInterval(() => displayPosts(), 1000)
+
+        const remove = async (id) => {
+            try {
+                const res = await fetch(`/api/posts/${id}`, {
+                    method: "DELETE"
+                })
+                const data = await res.json()
+            } catch (e) {
+                console.log(e)
+            }
         }
     </script>
 </body>
