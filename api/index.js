@@ -1,11 +1,12 @@
 const express = require("express")
 const fs = require("fs")
+const path = require("path")
 const bodyParser = require("body-parser")
 
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
+app.use(express.static(path.join(__dirname, '../public')))
 
 app.get("/", (req, res) => {
     res.type("text/html")
@@ -70,7 +71,7 @@ app.delete("/api/posts/:id", (req, res) => {
     })
 })
 
-let port = 3014
+let port = 3018
 
 app.listen(port, () => {
     console.log('App running on port ' + port)

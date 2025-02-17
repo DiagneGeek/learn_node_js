@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/global.css">
     <title>3ème Family</title>
 </head>
 <body>
@@ -25,10 +26,10 @@
                 postsSec.innerHTML = ""
                 posts.forEach(post => {
                     let newPost = `
-                      <div>
-                         <h1>${post.title}</h1>
+                      <div class="post">
+                         <h2>${post.title}</h2>
                          <p>${post.body}</p>
-                         <button onclick="remove(${post.id})">supprimer</button>
+                         <button class="deleteBtn" onclick="remove(${post.id})">supprimer</button>
                       </div>
                     `
                     postsSec.innerHTML += newPost
