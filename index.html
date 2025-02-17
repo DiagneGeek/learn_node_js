@@ -13,23 +13,6 @@
     </form>
     <ul id="todoList"></ul>
     <script>
-        document.getElementById("todoForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const title = document.getElementById("todoInput").value;
-            fetch("/api/todos", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ title })
-            }).then(res => res.json()).then(data => {
-                const li = document.createElement("li");
-                li.textContent = data.title;
-                document.getElementById("todoList").appendChild(li);
-                document.getElementById("todoInput").value = "";
-            });
-        });
-
         fetch("/api/todos").then(res => res.json()).then(data => {
             data.forEach(item => {
                 const li = document.createElement("li");
@@ -48,7 +31,6 @@
                 },
                 body: JSON.stringify({ title })
             }).then(res => res.json()).then(data => {
-                document.body.append(JSON.stringify(data));
                 const li = document.createElement("li");
                 li.textContent = data.title;
                 document.getElementById("todoList").appendChild(li);
