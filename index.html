@@ -14,11 +14,12 @@
 
     <main>
        <h1>POSTES</h1>
-
+      
        <section class="posts"></section>
     </main>
 
-    <script>
+    <script type="module">
+        import {svg} from "./images/svg.js"
         let postsSec = document.querySelector(".posts")
         const displayPosts = () => {
             fetch("/api/posts").then(res => res.json()).then(posts => {
@@ -29,7 +30,10 @@
                       <div class="post">
                          <h2>${post.title}</h2>
                          <p>${post.body}</p>
-                         <button class="deleteBtn" onclick="remove(${post.id})">supprimer</button>
+                         <div class="btns">
+                            <button>modifier</button>
+                            <button class="deleteBtn" onclick="remove(${post.id})">${svg.trash}</button>
+                        </div>
                       </div>
                     `
                     postsSec.innerHTML += newPost
