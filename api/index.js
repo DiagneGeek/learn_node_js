@@ -61,6 +61,6 @@ app.delete("/api/todos/:id", (req, res) => {
     })
 })
 
-app.listen(3333, () => console.log('App running on port 3333'))
+app.listen(3000, () => console.log('App running on port 3000'))
 
 module.exports = app
