@@ -1,8 +1,12 @@
 {
-  "dependencies": {
-    "express": "^4.21.2"
-  },
+  "name": "todo-list",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "dev": "vercel dev",
+    "build": "vercel build"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
