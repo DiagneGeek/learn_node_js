@@ -13,13 +13,16 @@
     </form>
     <ul id="todoList"></ul>
     <script>
-        fetch("/api/todos").then(res => res.json()).then(data => {
+       const displayTodos = () => fetch("/api/todos").then(res => res.json()).then(data => {
             data.forEach(item => {
                 const li = document.createElement("li");
                 li.textContent = item.title;
                 document.getElementById("todoList").appendChild(li);
             });
         });
+        displayTodos()
+
+        setInterval(() => displayTodos(), 1000)
 
         function addTodo(e) {
             e.preventDefault();
