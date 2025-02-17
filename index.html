@@ -14,10 +14,12 @@
     <ul id="todoList"></ul>
     <script>
        const displayTodos = () => fetch("/api/todos").then(res => res.json()).then(data => {
+           let list = document.getElementById("todoList")
+           list.innerHTML = ""
             data.forEach(item => {
                 const li = document.createElement("li");
                 li.textContent = item.title;
-                document.getElementById("todoList").appendChild(li);
+                list.appendChild(li);
             });
         });
         displayTodos()
