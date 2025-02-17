@@ -4,6 +4,7 @@
   "main": "api/index.js",
   "scripts": {
     "dev": "vercel dev",
+    "start": "api/index.js",
     "build": "vercel build"
   },
   "dependencies": {
