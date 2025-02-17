@@ -7,11 +7,11 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
-    res.send(fs.readFileSync("index.html", 'utf8'))
+    res.send(fs.readFileSync("../index.html", 'utf8'))
 })
 
 app.get("/api/todos", (req, res) => {
-    fs.readFile("todos.json", 'utf8', (err, data) => {
+    fs.readFile("../todos.json", 'utf8', (err, data) => {
         if (err) {
             res.status(500).send({ error: "Could not read todos.json" })
         } else {
@@ -21,7 +21,7 @@ app.get("/api/todos", (req, res) => {
 })
 
 app.post("/api/todos", (req, res) => {
-    fs.readFile("todos.json", 'utf8', (err, data) => {
+    fs.readFile("../todos.json", 'utf8', (err, data) => {
         if (err) {
             res.status(500).send({ error: "Could not read todos.json" })
         } else {
@@ -32,7 +32,7 @@ app.post("/api/todos", (req, res) => {
                 completed: false
             }
             todos.push(newTodo)
-            fs.writeFile("todos.json", JSON.stringify(todos), (err) => {
+            fs.writeFile("../todos.json", JSON.stringify(todos), (err) => {
                 if (err) {
                     res.status(500).send({ error: "Could not write to todos.json" })
                 } else {
@@ -44,13 +44,13 @@ app.post("/api/todos", (req, res) => {
 })
 
 app.delete("/api/todos/:id", (req, res) => {
-    fs.readFile("todos.json", 'utf8', (err, data) => {
+    fs.readFile("../todos.json", 'utf8', (err, data) => {
         if (err) {
             res.status(500).send({ error: "Could not read todos.json" })
         } else {
             let todos = JSON.parse(data)
             todos = todos.filter(todo => todo.id !== parseInt(req.params.id))
-            fs.writeFile("todos.json", JSON.stringify(todos), (err) => {
+            fs.writeFile("../todos.json", JSON.stringify(todos), (err) => {
                 if (err) {
                     res.status(500).send({ error: "Could not write to todos.json" })
                 } else {
